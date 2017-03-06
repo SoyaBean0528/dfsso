@@ -9,9 +9,9 @@ type MainController struct {
 }
 
 func (this *MainController) Get() {
-	this.TplName = "main.tpl"
+	this.TplName = "index.tpl"
 }
 
-func (this *MainController) Sub() {
-	this.TplName = "sub.tpl"	
+func (this *MainController) User() {
+	this.TplName = "user.tpl"	
 }
