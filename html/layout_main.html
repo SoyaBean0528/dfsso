@@ -117,15 +117,7 @@ desired effect
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
         <!-- Optionally, you can add icons to the links -->
-        {{range $index, $bar := .SideBar }}
-          <li {{if eq $bar.Name $.PageName}} class="active" {{end}}>
-              <a href={{$bar.Href}}>
-                <i class={{$bar.Icon}}>
-                </i> 
-                <span>{{$bar.Name}}</span>
-                </a>
-          </li>
-        {{end}}
+        <li class="active"><a href="/"><i class="fa fa-link"></i> <span>控制台</span>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -157,7 +149,7 @@ desired effect
 
     <!-- Main content -->
     <section class="content">
-      {{.LayoutContent}} 
+      {{.PageContent}} 
     </section>
     <!-- /.content -->
   </div>

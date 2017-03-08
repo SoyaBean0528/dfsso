@@ -1,3 +1,3 @@
 <p>
-  DashBoard
+  控制台
 </p>

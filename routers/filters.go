@@ -1,7 +1,7 @@
 package routers
 
 import (
-	// "strings"
+	"strings"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
 )
@@ -11,14 +11,14 @@ func init() {
 }
 
 func checkLogin(ctx *context.Context) {
-	// // except login
-	// if strings.Index(ctx.Request.RequestURI, "/login") != -1 {
-	// 	return
-	// }
-	// // session
-	// _, ok := ctx.Input.Session("uid").(int64)
-	// if !ok {
-	// 	beego.Info("Redirect to login.")
-	// 	ctx.Redirect(302, "/login?uri=" + ctx.Request.RequestURI)
-	// }
+	// except login
+	if strings.Index(ctx.Request.RequestURI, "/login") != -1 {
+		return
+	}
+	// session
+	userData := ctx.Input.Session("userData")
+	if userData == nil {
+		beego.Info("Redirect to login.")
+		ctx.Redirect(302, "/login?uri=" + ctx.Request.RequestURI)
+	}
 }

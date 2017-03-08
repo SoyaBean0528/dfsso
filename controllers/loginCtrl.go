@@ -34,6 +34,14 @@ func (this *LoginController) Login() {
 		return
 	}
 	// session
-	this.SetSession("uid", user.Id)
+	this.SetSession("userData", user)
 	this.Ctx.Redirect(302, uri)
+}
+
+func (this *LoginController) Logout() {
+	userData := this.GetSession("userData")
+    if userData != nil {
+    	this.DelSession("userData")
+    }
+    this.Ctx.Redirect(302, "/login")
 }
