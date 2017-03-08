@@ -9,14 +9,14 @@ type LoginController struct {
 	beego.Controller
 }
 
-func (this *LoginController) Get() {
+func (this *LoginController) Index() {
 	this.Data["msg"] = "登录"
 	this.Data["color"] = "black"
 	this.Data["uri"] = this.GetString("uri") 
 	this.TplName = "login.tpl"
 }
 
-func (this *LoginController) Post() {
+func (this *LoginController) Login() {
 	// get params	
 	uri := this.GetString("uri")
 	username := this.GetString("username")
