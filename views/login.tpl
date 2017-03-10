@@ -46,6 +46,7 @@
           <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
       </div>
     </form>
+  </div>
 </div>
 <!-- /.login-box -->
 
