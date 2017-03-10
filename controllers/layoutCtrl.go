@@ -11,6 +11,7 @@ var (
 
 type LayoutData struct {
 	PageName string 
+	Scripts []string
 	Breadcrumb []map[string]string
 }
 
@@ -37,6 +38,7 @@ func init() {
 
 func (this *LayoutController) SetMainLayout(data *LayoutData) {
 	// input data
+	this.Data["Scripts"] = data.Scripts
 	this.Data["PageName"] = data.PageName
 	this.Data["Breadcrumb"] = data.Breadcrumb
 	this.Data["BreadcrumbEnd"] = len(data.Breadcrumb) - 1

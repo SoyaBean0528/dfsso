@@ -11,21 +11,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Title & favicon -->
   <title>DreamFish | SSO</title>
-  <link href="../static/favicon-32.ico" rel="icon" type="image/x-icon" />
-  <!-- Bootstrap 3.3.6 -->
+   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome 4.5.0 -->
   <link rel="stylesheet" href="../static/fontawesome/css/font-awesome.min.css">
   <!-- Ionicons 2.0.1 -->
   <link rel="stylesheet" href="../static/dionicons/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../static/plugins/datatables/dataTables.bootstrap.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../static/adminlte/css/AdminLTE.min.css">
+
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-        page. However, you can choose any other skin. Make sure you
-        apply the skin class to the body tag so the changes take effect.
+    page. However, you can choose any other skin. Make sure you
+    apply the skin class to the body tag so the changes take effect.
   -->
   <link rel="stylesheet" href="../static/adminlte/css/skins/skin-blue.min.css">
-
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -54,139 +55,144 @@ desired effect
 |---------------------------------------------------------|
 -->
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+  <div class="wrapper">
 
-  <!-- Main Header -->
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="/" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>DF</b></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>DreamFish</b>SSO</span>
-    </a>
-
-    <!-- Header Navbar -->
-    <nav class="navbar navbar-static-top" role="navigation">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
+    <!-- Main Header -->
+    <header class="main-header">
+      <!-- Logo -->
+      <a href="/" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>DF</b></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>DreamFish</b>SSO</span>
       </a>
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- User Account Menu -->
-          <li class="dropdown user user-menu">
-            <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- The user image in the navbar-->
-              <img src="../static/img/avatar/avatar1.png" class="user-image" alt="User Image">
-              <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{{.Username}}</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- The user image in the menu -->
-              <li class="user-header">
-                <img src="../static/img/avatar/avatar1.png" class="img-circle" alt="User Image">
 
-                <p>
-                  {{.Username}}  <small>{{.UserGroup}}</small>
-                </p>
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+      <!-- Header Navbar -->
+      <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account Menu -->
+            <li class="dropdown user user-menu">
+              <!-- Menu Toggle Button -->
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <!-- The user image in the navbar-->
+                <img src="../static/img/avatar/avatar1.png" class="user-image" alt="User Image">
+                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                <span class="hidden-xs">{{.Username}}</span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- The user image in the menu -->
+                <li class="user-header">
+                  <img src="../static/img/avatar/avatar1.png" class="img-circle" alt="User Image">
 
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-
-      <!-- Sidebar Menu -->
-      <ul class="sidebar-menu">
-        <!-- Optionally, you can add icons to the links -->
-        {{range $index, $bar := .SideBar }}
-          <li {{if eq $bar.Name $.PageName}} class="active" {{end}}>
-              <a href={{$bar.Href}}>
-                <i class={{$bar.Icon}}>
-                </i> 
-                <span>{{$bar.Name}}</span>
-                </a>
-          </li>
-        {{end}}
-      </ul>
-      <!-- /.sidebar-menu -->
-    </section>
-    <!-- /.sidebar -->
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        {{.PageName}}
-      </h1>
-      <ol class="breadcrumb">
-        {{range $index, $breadcrumb  := .Breadcrumb}}
-            <li {{if eq $index $.BreadcrumbEnd}} class="active" {{end}}> 
-              {{if ne $index $.BreadcrumbEnd }} <a href="/"> {{end}}
-                {{if $breadcrumb.Icon}} <i class={{$breadcrumb.Icon}}></i> {{end}}
-                {{$breadcrumb.Name}}
-              {{if ne $index $.BreadcrumbEnd }} </a> {{end}}
+                  <p>
+                    {{.Username}}  <small>{{.UserGroup}}</small>
+                  </p>
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  </div>
+                  <div class="pull-right">
+                    <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
+                  </div>
+                </li>
+              </ul>
             </li>
-        {{end}}
-        <!--
-        <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
-        <li class="active">Dashboard</li>
-        -->
-      </ol>
-    </section>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
 
-    <!-- Main content -->
-    <section class="content">
-      {{.LayoutContent}} 
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
 
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="pull-right hidden-xs">
-      Happy every day ^_^
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu">
+          <!-- Optionally, you can add icons to the links -->
+          {{range $index, $bar := .SideBar }}
+          <li {{if eq $bar.Name $.PageName}} class="active" {{end}}>
+            <a href={{$bar.Href}}>
+              <i class={{$bar.Icon}}>
+              </i> 
+              <span>{{$bar.Name}}</span>
+            </a>
+          </li>
+          {{end}}
+        </ul>
+        <!-- /.sidebar-menu -->
+      </section>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          {{.PageName}}
+        </h1>
+        <ol class="breadcrumb">
+          {{range $index, $breadcrumb  := .Breadcrumb}}
+          <li {{if eq $index $.BreadcrumbEnd}} class="active" {{end}}> 
+            {{if ne $index $.BreadcrumbEnd }} <a href="/"> {{end}}
+            {{if $breadcrumb.Icon}} <i class={{$breadcrumb.Icon}}></i> {{end}}
+            {{$breadcrumb.Name}}
+            {{if ne $index $.BreadcrumbEnd }} </a> {{end}}
+          </li>
+          {{end}}
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+       {{.LayoutContent}}  
+      </section>
+      <!-- /.content -->
     </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="index.html">DreamFish</a>.</strong> All rights reserved.
-  </footer>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+      <!-- To the right -->
+      <div class="pull-right hidden-xs">
+        Happy every day ^_^
+      </div>
+      <!-- Default to the left -->
+      <strong>Copyright &copy; 2016 <a href="index.html">DreamFish</a>.</strong> All rights reserved.
+    </footer>
 </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-
 <!-- jQuery 2.2.3 -->
 <script src="../static/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../static/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../static/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../static/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../static/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../static/adminlte/js/app.min.js"></script>
-
+<script src="../static/dist/js/app.min.js"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. Slimscroll is required when using the
-     fixed layout. -->
+Both of these plugins are recommended to enhance the
+user experience. Slimscroll is required when using the
+fixed layout. -->
+{{range .Scripts}}
+  <script src={{.}}></script>
+{{end}}
+
 </body>
 </html>

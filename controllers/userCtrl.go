@@ -2,6 +2,7 @@ package controllers
 
 import (
 	// "github.com/astaxie/beego"
+	"dreamfish/dfsso/models/userModel"
 )
 
 var (
@@ -28,9 +29,16 @@ func init(){
 	navi["Name"] = "用户管理"
 	navi["Icon"] = "glyphicon glyphicon-user"
 	userLayoutData.Breadcrumb = append(userLayoutData.Breadcrumb, navi) 
+	// Scripts
+	userLayoutData.Scripts = make([]string, 0, 1)
+	userLayoutData.Scripts = append(userLayoutData.Scripts, "../static/js/user.js")
 }
 
 func (this *UserController) Index() {
+	// main layout 
 	this.LayoutController.SetMainLayout(userLayoutData)
 	this.TplName = "user.tpl"
+	// user list
+	userList := userModel.GetUserList()
+	this.Data["UserList"] = userList
 }

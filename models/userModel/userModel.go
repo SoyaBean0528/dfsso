@@ -50,3 +50,12 @@ func ByName(username string) (user *User) {
 
 	return user
 }
+
+func GetUserList() (users []*User) {
+	user := new(User)
+
+	o := orm.NewOrm()
+	o.QueryTable(user).All(&users)
+
+	return users
+}
