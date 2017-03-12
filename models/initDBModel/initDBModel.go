@@ -22,10 +22,8 @@ func insertDatas() {
 }
 
 func insertUsers() {
-	user := &userModel.User{ Username:"admin", Creator:"system"}
-	user.Password = userModel.EncryptPassword("12")
-	o := orm.NewOrm()
-	o.Insert(user)
+	user := &userModel.User{ Username:"admin", Password:"12", Creator:"system"}
+	userModel.AddUser(user)
 }
 
 type DBInitializ struct {

@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 
-	_ "dreamfish/dfsso/routers"
 	"dreamfish/dfsso/models/initDBModel"
+	_ "dreamfish/dfsso/routers"
 
 	"github.com/astaxie/beego"
 )

@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
 	"dreamfish/dfsso/models/userModel"
+	"github.com/astaxie/beego"
 )
 
 var (
@@ -10,8 +10,8 @@ var (
 )
 
 type LayoutData struct {
-	PageName string 
-	Scripts []string
+	PageName   string
+	Scripts    []string
 	Breadcrumb []map[string]string
 }
 
@@ -50,6 +50,6 @@ func (this *LayoutController) SetMainLayout(data *LayoutData) {
 		this.Data["Username"] = userData.Username
 	}
 	this.Layout = "layout_main.tpl"
-    // this.LayoutSections = make(map[string]string)
-    // this.LayoutSections["PageContent"] = "blogs/html_head.tpl"
+	// this.LayoutSections = make(map[string]string)
+	// this.LayoutSections["PageContent"] = "blogs/html_head.tpl"
 }

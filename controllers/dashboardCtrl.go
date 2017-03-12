@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	// "github.com/astaxie/beego"
+// "github.com/astaxie/beego"
 )
 
 var (
@@ -12,8 +12,8 @@ type DashboardController struct {
 	LayoutController
 }
 
-func init(){
-	dashboardLayoutData = &LayoutData{ PageName:"控制台" }
+func init() {
+	dashboardLayoutData = &LayoutData{PageName: "控制台"}
 	// Breadcurmb
 	dashboardLayoutData.Breadcrumb = make([]map[string]string, 0, 1)
 	// 1
@@ -21,7 +21,7 @@ func init(){
 	navi["Ref"] = "/"
 	navi["Name"] = "控制台"
 	navi["Icon"] = "fa fa-dashboard"
-	dashboardLayoutData.Breadcrumb = append(dashboardLayoutData.Breadcrumb, navi) 
+	dashboardLayoutData.Breadcrumb = append(dashboardLayoutData.Breadcrumb, navi)
 }
 
 func (this *DashboardController) Index() {

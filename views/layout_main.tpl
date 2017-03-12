@@ -11,12 +11,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Title & favicon -->
   <title>DreamFish | SSO</title>
-   <!-- Bootstrap 3.3.6 -->
+  <link href="../static/favicon-32.ico" rel="icon" type="image/x-icon" />
+  <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome 4.5.0 -->
   <link rel="stylesheet" href="../static/fontawesome/css/font-awesome.min.css">
   <!-- Ionicons 2.0.1 -->
-  <link rel="stylesheet" href="../static/dionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../static/ionicons/css/ionicons.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="../static/plugins/datatables/dataTables.bootstrap.css">
   <!-- Theme style -->
@@ -33,6 +34,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+
+  <!-- Custom CSS -->
 </head>
 <!--
 BODY TAG OPTIONS:

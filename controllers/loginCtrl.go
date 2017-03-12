@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
 	"dreamfish/dfsso/models/loginModel"
+	"github.com/astaxie/beego"
 )
 
 type LoginController struct {
@@ -10,26 +10,27 @@ type LoginController struct {
 }
 
 func (this *LoginController) Index() {
-	this.Data["msg"] = "登录"
-	this.Data["color"] = "black"
-	this.Data["uri"] = this.GetString("uri") 
+	this.Data["Msg"] = "登录"
+	this.Data["Color"] = "black"
+	this.Data["Uri"] = this.GetString("uri")
 	this.TplName = "login.tpl"
 }
 
 func (this *LoginController) Login() {
-	// get params	
+	// get params
 	uri := this.GetString("uri")
 	username := this.GetString("username")
 	password := this.GetString("password")
 	this.Data["username"] = username
 	this.Data["password"] = password
-	// log 
+	// log
 	beego.Info("Login Username =", username, "Password =", password, "Uri = ", uri)
 	// login
 	user, err := loginModel.Login(username, password)
 	if err != nil {
-		this.Data["msg"] = err.Error()
-		this.Data["color"] = "red"
+		this.Data["Uri"] = uri
+		this.Data["Msg"] = err.Error()
+		this.Data["Color"] = "red"
 		this.TplName = "login.tpl"
 		return
 	}
@@ -40,8 +41,8 @@ func (this *LoginController) Login() {
 
 func (this *LoginController) Logout() {
 	userData := this.GetSession("userData")
-    if userData != nil {
-    	this.DelSession("userData")
-    }
-    this.Ctx.Redirect(302, "/login")
+	if userData != nil {
+		this.DelSession("userData")
+	}
+	this.Ctx.Redirect(302, "/login")
 }

@@ -1,6 +1,8 @@
 package userModel 
 
 import (
+	"errors"
+	"strings"
 	"crypto/md5"
 	"encoding/hex"
 	"github.com/astaxie/beego/orm"
@@ -14,6 +16,12 @@ type User struct {
 	Creator  string `orm:"size(20)"`
 }
 
+var (
+	errUserExisted = errors.New("用户已存在！")
+	errPasswordNil = errors.New("密码不能为空！")
+	errUsernameNil = errors.New("用户名不能为空！")
+)
+
 // init
 func init() {
 	orm.RegisterModel(new(User))
@@ -22,6 +30,20 @@ func init() {
 // for orm
 func (this *User) TableName() string {
 	return ("User")
+}
+
+/**
+ * Method
+ */
+func checkUser(user *User) (error) {
+	if user.Username == "" {
+		return errUsernameNil
+	}	
+	if user.Password == "" {
+		return errPasswordNil
+	}
+
+	return nil
 }
 
 /**
@@ -58,4 +80,24 @@ func GetUserList() (users []*User) {
 	o.QueryTable(user).All(&users)
 
 	return users
+}
+
+func AddUser(user *User) (error) {
+	// check user
+	if err:= checkUser(user) ;err != nil {
+		return err
+	}
+	// encrypt password
+	user.Password = EncryptPassword(user.Password)
+	// insert
+	o := orm.NewOrm()
+	_, err := o.Insert(user)
+	// insert err
+	if err != nil {
+		if strings.Index(err.Error(), "1062") != -1 {
+			return errUserExisted
+		}
+	}
+
+	return nil 
 }

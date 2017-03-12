@@ -31,17 +31,20 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg" style="color:{{.color}}">{{.msg}}</p>
+    <p class="login-box-msg" style="color:{{.Color}}">{{.Msg}}</p>
 
     <form action="login" method="post">
       <div class="form-group has-feedback">
-        <input name="username" type="用户名" class="form-control" placeholder="用户名">
+        <input name="username" type="text" class="form-control" placeholder="用户名">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input name="password" type="密码" class="form-control" placeholder="密码">
+        <input name="password" type="password" class="form-control" placeholder="密码">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      {{if .Uri}} 
+        <input name="uri" type="hidden" value={{.Uri}}>
+      {{end}}
       <div class="form-group">
           <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
       </div>
