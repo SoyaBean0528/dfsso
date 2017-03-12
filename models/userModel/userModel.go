@@ -63,6 +63,11 @@ func CheckPassword(user *User, password string) bool {
 	return user.Password == EncryptPassword(password)	
 }
 
+// admin id
+func GetAdminID() (int) {
+	return 1
+}
+
 // get user by username
 func ByName(username string) (user *User) {
 	user = &User{Username:username}

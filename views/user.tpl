@@ -58,6 +58,7 @@
           <th>用户名</th>
           <th>用户组</th>
           <th>创建者</th>
+          <th>操作</th>
         </tr>
       </thead>
       <tbody>
@@ -67,6 +68,18 @@
       			<td>{{.Username}}</td>
       			<td></td>
       			<td>{{.Creator}}</td>
+            <td>
+              {{if ne .Id $.AdminID }}
+                <div class="btn-group-xs">
+                  <button type="button" class="btn btn-xs btn-info col-xs-2 col-xs-push-0">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button type="button" class="btn btn-xs btn-danger col-xs-2 col-xs-push-1">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              {{end}}
+            </td>
       		</tr>
       	{{end}}
       	<!--

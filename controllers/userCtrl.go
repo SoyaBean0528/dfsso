@@ -40,6 +40,12 @@ func (this *UserController) Index() {
 	this.TplName = "user.tpl"
 	// user list
 	userList := userModel.GetUserList()
+	// err flash
+	flash := beego.ReadFromRequest(&this.Controller)
+	if err := flash.Data["error"]; err != "" {
+		this.Data["Msg"] = err 
+    }
+    this.Data["AdminID"] = userModel.GetAdminID() 
 	this.Data["UserList"] = userList
 }
 
@@ -56,8 +62,10 @@ func (this *UserController) AddUser() {
 	// add
 	err := userModel.AddUser(user)
 	if err != nil {
-		this.Data["Msg"] = err.Error()		
-		this.Index()
+		flash := beego.NewFlash()
+		flash.Error(err.Error())
+		flash.Store(&this.Controller)
+		this.Redirect("/user", 302)
 	}
 
 	this.Index()
