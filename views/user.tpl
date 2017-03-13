@@ -149,7 +149,7 @@
                 <button id="{{$user.Id}}" row="{{$index}}" type="button" class="btn btn-xs btn-info" style="width:30px" onclick="showEditUserModal(this);">
                   <i class="fa fa-edit"></i>
                 </button>
-                {{if ne $user.Id $.CurID}}
+                {{if ne $user.Id $.UserData.Id}}
                   <button id="{{$user.Id}}" row="{{$index}}" type="button" class="btn btn-xs btn-danger" style="width:30px" onclick="showDelUserModal(this);">
                     <i class="fa fa-trash"></i>
                   </button>

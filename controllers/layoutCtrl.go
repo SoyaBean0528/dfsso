@@ -10,6 +10,7 @@ var (
 )
 
 type LayoutData struct {
+	Uri string
 	PageName   string
 	Scripts    []string
 	Breadcrumb []map[string]string
@@ -46,8 +47,7 @@ func (this *LayoutController) SetMainLayout(data *LayoutData) {
 	this.Data["SideBar"] = mainLayoutSideBar
 	userData := this.GetSession("userData")
 	if userData != nil {
-		userData := userData.(*userModel.User)
-		this.Data["Username"] = userData.Username
+		this.Data["UserData"] = userData.(*userModel.User)
 	}
 	this.Layout = "layout_main.tpl"
 	// this.LayoutSections = make(map[string]string)

@@ -14,7 +14,7 @@ type UserController struct {
 }
 
 func init() {
-	userLayoutData = &LayoutData{PageName: "用户管理"}
+	userLayoutData = &LayoutData{PageName: "用户管理", Uri:"/user"}
 	// Breadcurmb
 	userLayoutData.Breadcrumb = make([]map[string]string, 0, 1)
 	// 1
@@ -46,8 +46,6 @@ func (this *UserController) Index() {
 		msg := flash.Data["notice"]
 		this.Data[msg + "Msg"] = err 
     }
-	userData := this.GetSession("userData").(*userModel.User)
-	this.Data["CurID"] = userData.Id
     this.Data["AdminID"] = userModel.GetAdminID() 
 	this.Data["UserList"] = userList
 }

@@ -13,7 +13,7 @@ type DashboardController struct {
 }
 
 func init() {
-	dashboardLayoutData = &LayoutData{PageName: "控制台"}
+	dashboardLayoutData = &LayoutData{PageName: "控制台", Uri:"/"}
 	// Breadcurmb
 	dashboardLayoutData.Breadcrumb = make([]map[string]string, 0, 1)
 	// 1

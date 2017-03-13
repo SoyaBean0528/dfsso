@@ -86,7 +86,7 @@ desired effect
                 <!-- The user image in the navbar-->
                 <img src="../static/img/avatar/avatar1.png" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                <span class="hidden-xs">{{.Username}}</span>
+                <span class="hidden-xs">{{.UserData.Username}}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
@@ -94,13 +94,15 @@ desired effect
                   <img src="../static/img/avatar/avatar1.png" class="img-circle" alt="User Image">
 
                   <p>
-                    {{.Username}}  <small>{{.UserGroup}}</small>
+                    {{.UserData.Username}}  <small>TODO</small>
                   </p>
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#profileModal">
+                  Profile
+                  </button>
                   </div>
                   <div class="pull-right">
                     <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
@@ -175,6 +177,36 @@ desired effect
 </div>
 <!-- ./wrapper -->
 
+<!-- profile modal -->
+<div class="modal modal-info fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="create-user-label" aria-hidden="true">
+  <div class="modal-dialog" style="width:380px;margin:10% auto">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="create-user-label">
+          Profile
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <a href="#" data-toggle="popover" data-placement="bottom" data-trigger="click" style="height:50px;margin-left:165px">
+            <img src="../static/img/avatar/avatar1.png" class="img-circle" alt="User Image" style="height:50px;;border:2px solid;border-color:transparent;border-color:rgba(255,255,255,0.3);" >
+          </a>  
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">取消</button>
+        <button id="delUserModalOK" type="button" class="btn btn-outline">
+          保存
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
 <!-- REQUIRED JS SCRIPTS -->
 <!-- jQuery 2.2.3 -->
 <script src="../static/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -193,6 +225,7 @@ desired effect
 Both of these plugins are recommended to enhance the
 user experience. Slimscroll is required when using the
 fixed layout. -->
+<script src="../static/js/layout_main.js"></script>
 {{range .Scripts}}
   <script src={{.}}></script>
 {{end}}
