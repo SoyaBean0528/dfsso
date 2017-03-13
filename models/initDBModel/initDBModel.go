@@ -22,8 +22,8 @@ func insertDatas() {
 }
 
 func insertUsers() {
-	user := &userModel.User{ Username:"admin", Password:"12", Creator:"system"}
-	userModel.AddUser(user)
+	user := &userModel.User{ Username:"admin", Creator:"system"}
+	userModel.AddNewUser(user)
 }
 
 type DBInitializ struct {

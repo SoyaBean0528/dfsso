@@ -20,6 +20,8 @@ var (
 	errUserExisted = errors.New("用户已存在！")
 	errPasswordNil = errors.New("密码不能为空！")
 	errUsernameNil = errors.New("用户名不能为空！")
+	errCantDelSelf = errors.New("不能删除当前登陆用户！")
+	errCantDelAdmin = errors.New("不能删除Admin用户！")
 )
 
 // init
@@ -33,22 +35,13 @@ func (this *User) TableName() string {
 }
 
 /**
- * Method
- */
-func checkUser(user *User) (error) {
-	if user.Username == "" {
-		return errUsernameNil
-	}	
-	if user.Password == "" {
-		return errPasswordNil
-	}
-
-	return nil
-}
-
-/**
  * Public Interface
  */
+
+// admin id
+func GetAdminID() (int64) {
+	return 1
+}
 
 // encrypt the password by md5
 func EncryptPassword(password string) string {
@@ -61,11 +54,6 @@ func EncryptPassword(password string) string {
 // check password
 func CheckPassword(user *User, password string) bool {
 	return user.Password == EncryptPassword(password)	
-}
-
-// admin id
-func GetAdminID() (int) {
-	return 1
 }
 
 // get user by username
@@ -88,10 +76,10 @@ func GetUserList() (users []*User) {
 }
 
 func AddUser(user *User) (error) {
-	// check user
-	if err:= checkUser(user) ;err != nil {
-		return err
-	}
+	// check username
+	if user.Username == "" {
+		return errUsernameNil
+	}	
 	// encrypt password
 	user.Password = EncryptPassword(user.Password)
 	// insert
@@ -105,4 +93,35 @@ func AddUser(user *User) (error) {
 	}
 
 	return nil 
+}
+
+func AddNewUser(user *User) (error) {
+	user.Password = "12"
+	
+	return AddUser(user)
+}
+
+func DelUser(user *User, curUser *User) (error) {
+	// check user 
+	if user.Id == GetAdminID() {
+		return errCantDelAdmin
+	} else if user.Id == curUser.Id {
+		return errCantDelSelf
+	} 
+
+	o := orm.NewOrm()
+	_, err := o.Delete(user)
+
+	return err
+}
+
+
+func UpdateUser(user *User) (error) {
+	// password
+	user.Password = EncryptPassword(user.Password)
+	// update 
+	o := orm.NewOrm()
+	_, err := o.Update(user)
+
+	return err
 }

@@ -11,7 +11,7 @@
   <!-- Font Awesome 4.5.0 -->
   <link rel="stylesheet" href="../static/fontawesome/css/font-awesome.min.css">
   <!-- Ionicons 2.0.1 -->
-  <link rel="stylesheet" href="../static/dionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../static/ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../static/adminlte/css/AdminLTE.min.css">
   <!-- iCheck -->

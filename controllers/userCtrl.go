@@ -43,8 +43,11 @@ func (this *UserController) Index() {
 	// err flash
 	flash := beego.ReadFromRequest(&this.Controller)
 	if err := flash.Data["error"]; err != "" {
-		this.Data["Msg"] = err 
+		msg := flash.Data["notice"]
+		this.Data[msg + "Msg"] = err 
     }
+	userData := this.GetSession("userData").(*userModel.User)
+	this.Data["CurID"] = userData.Id
     this.Data["AdminID"] = userModel.GetAdminID() 
 	this.Data["UserList"] = userList
 }
@@ -56,17 +59,57 @@ func (this *UserController) AddUser() {
 	user := new(userModel.User)
 	user.Creator  = userData.Username
 	user.Username = this.GetString("username")	
-	user.Password = this.GetString("password")
 	// log
-	beego.Info("Add User Username=", user.Username, "Creator=", user.Creator)
+	beego.Info("Add User Username =", user.Username, "Creator =", user.Creator)
 	// add
-	err := userModel.AddUser(user)
+	err := userModel.AddNewUser(user)
 	if err != nil {
 		flash := beego.NewFlash()
+		flash.Notice("AddUser")
 		flash.Error(err.Error())
 		flash.Store(&this.Controller)
-		this.Redirect("/user", 302)
 	}
 
-	this.Index()
+	this.Redirect("/user", 302)
+}
+
+func (this *UserController) DelUser() {
+	// var
+	id, _ := this.GetInt("userid")
+	userData := this.GetSession("userData").(*userModel.User)
+	// uer 
+	user := &userModel.User{ Id:int64(id) }
+	// log
+	beego.Info("Del User UserID =", user.Id)
+	// del
+	err := userModel.DelUser(user, userData)
+	if err != nil {
+		flash := beego.NewFlash()
+		flash.Notice("DelUser")
+		flash.Error(err.Error())
+		flash.Store(&this.Controller)
+	}
+	
+	this.Redirect("/user", 302)
+}
+
+func (this *UserController) EditUser() {
+	// var
+	id, _ := this.GetInt("userid")
+	// user
+	user := new(userModel.User)
+	user.Id = int64(id)
+	user.Username = this.GetString("username")
+	user.Password = this.GetString("password")
+	beego.Info("UpdateUser UserName = ", user.Username)
+	// update
+	err := userModel.UpdateUser(user)
+	if err != nil {
+		flash := beego.NewFlash()
+		flash.Notice("UpdateUser")
+		flash.Error(err.Error())
+		flash.Store(&this.Controller)
+	}
+
+	this.Redirect("/user", 302)
 }
